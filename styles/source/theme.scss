@@ -16,20 +16,20 @@
 
 // Twilio Colors
 
-$twilioRed: #e12127;
-$twilioMaroon: #971d1f;
-$twilioGray: #2c2c2a;
-$twilioBlack: #231f20;
-$twilioBrown: #b1aca0;
-$twilioBeige: #dbddd7;
-$twilioBlue: #54c3c2;
+$childsafeGreen: #00bc70;
+$childsafeBlue: #00b1e1;
+$childsafeOrange: #f36c3f;
+$childsafeWhite: #fffff9;
+$childsafeDarkGray: #5b6670;
+$childsafeGray: #cfd2d3;
+$childsafeBlack: #232323;
 
 
 // Override theme settings (see ../template/settings.scss)
-$backgroundColor: #fff;
+$backgroundColor: $childsafeWhite;
 
-$mainColor: $twilioGray;
-$headingColor: $twilioGray;
+$mainColor: $childsafeBlack;
+$headingColor: $childsafeBlack;
 
 $mainFontSize: 38px;
 $mainFont: 'Source Sans Pro', Helvetica, sans-serif;
@@ -38,7 +38,7 @@ $headingTextShadow: none;
 $headingLetterSpacing: normal;
 $headingTextTransform: uppercase;
 $headingFontWeight: 600;
-$linkColor: $twilioRed;
+$linkColor: $childsafeBlue;
 $linkColorHover: lighten( $linkColor, 15% );
 $selectionBackgroundColor: lighten( $linkColor, 25% );
 
@@ -71,37 +71,37 @@ section.has-dark-background {
     height: 100%;
 }
 
-.reveal .red {
-    background-color: $twilioRed;
-}
-
-.reveal .gray {
-    background-color: $twilioGray;
-}
-
-.reveal .maroon {
-    background-color: $twilioMaroon;
-}
-
-.reveal .black {
-    background-color: $twilioBlack;
-}
-
-.reveal .brown {
-    background-color: $twilioBrown; 
-}
-
-.reveal .beige {
-    background-color: $twilioBeige;
+.reveal .green {
+    background-color: $childsafeGreen;
 }
 
 .reveal .blue {
-    background-color: $twilioBlue;
+    background-color: $childsafeBlue;
+}
+
+.reveal .orange {
+    background-color: $childsafeOrange;
+}
+
+.reveal .black {
+    background-color: $childsafeBlack;
+}
+
+.reveal .white {
+    background-color: $childsafeWhite; 
+}
+
+.reveal .darkgray {
+    background-color: $childsafeDarkGray;
+}
+
+.reveal .gray {
+    background-color: $childsafeGray;
 }
 
 .reveal h1 {
     text-align: center;
-    background: $linkColor;
+    background: $childsafeGreen;
     color: #fff;
     width: 100%;
     float: right;
@@ -110,10 +110,10 @@ section.has-dark-background {
     bottom: -0.2em;
 }
 
-.reveal img.unstyled {
-    background: none;
-    border: none;
-    box-shadow: none;
+.reveal img {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 .reveal .title h3 {
@@ -192,6 +192,14 @@ html.img-top div.slide-background.present {
   background-position: top;
 }
 
+.logo {
+  margin: 0 auto 0 auto;
+  height: 250px;
+  background-image: url("../images/childsafeai/svg/animated/logo-animated-side.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .title h3 {
   text-align: right;
   padding: 0.25em 0.5em 0.25em 0.5em;
@@ -200,14 +208,14 @@ html.img-top div.slide-background.present {
 }
 
 .intro .title h3 {
-  background-color: $twilioRed;
+  background-color: $childsafeGreen;
   color: $backgroundColor;
   visibility: hidden;
 }
 
 .title .title h3 {
   background-color: $backgroundColor;
-  color: $twilioRed;
+  color: $childsafeBlack;
 }
 
 .animated {
@@ -228,17 +236,17 @@ html.img-top div.slide-background.present {
 }
 
 .vis-item {
-  background-color: $twilioGray;
+  background-color: $childsafeGray;
   color: $backgroundColor;
 }
 
 .vis-item.vis-line, .vis-item.vis-dot {
-  border-color: $twilioGray;
+  border-color: $childsafeGray;
 }
 
 .vis-item.vis-selected {
-  background-color: $twilioRed;
-  border-color: $twilioRed;
+  background-color: $childsafeGreen;
+  border-color: $childsafeGreen;
 }
 
 .reveal .timeline {
