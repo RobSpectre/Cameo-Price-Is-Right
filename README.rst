@@ -1,8 +1,8 @@
 ***************
-Twilio Reveal Template
+childsafe.ai Reveal Template
 ***************
 
-A template project for `Reveal.js`_ presentations used for my `Twilio`_ talks.
+A template project for `Reveal.js`_ presentations used for my `childsafe.ai`_ talks.
 
 
 **Table of Contents**
@@ -33,7 +33,7 @@ Clone repo
 
 .. code-block:: bash
 
-    $ git clone https://github.com/RobSpectre/Twilio-Reveal-Template.git 
+    $ git clone https://github.com/childsafeai/Reveal-Template.git 
 
 
 Install ``gulp`` and ``bower``
@@ -100,7 +100,7 @@ Meta
 * Released under `MIT License`_
 * Software is as is - no warranty expressed or implied.
 
-.. _Twilio: http://www.twilio.com
+.. _childsafe.ai: https://childsafe.ai
 .. _Reveal.js: http://lab.hakim.se/reveal-js/
 .. _C3: http://c3js.org/
 .. _Google Maps: https://developers.google.com/maps/documentation/javascript/
