@@ -253,3 +253,50 @@ html.img-top div.slide-background.present {
   height: 3em;
   margin-bottom: 1em;
 }
+
+.reveal .chat-window {
+  width: auto;
+  height: 100%;
+  padding: 2em 0 0 0;
+  background-color: $childsafeGray;
+}
+
+
+.chat-window ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 80%;
+}
+
+.chat-window ul li {
+  display:inline-block;
+  clear: both;
+  padding: 20px;
+  border-radius: 30px;
+  margin-bottom: 2px;
+  color: $childsafeWhite;
+}
+
+.chat-window .him {
+  background: $childsafeBlue;
+  float: left;
+}
+
+.chat-window .me {
+  float: right;
+  background: $childsafeGreen;
+}
+
+.chat-window .him + .me {
+  border-bottom-right-radius: 5px;
+}
+
+.chat-window .me + .me {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.chat-window .me:last-of-type {
+  border-bottom-right-radius: 30px;
+}

@@ -441,3 +441,41 @@ html.img-top div.slide-background.present {
 .reveal .timeline {
   height: 3em;
   margin-bottom: 1em; }
+
+.reveal .chat-window {
+  width: auto;
+  height: 100%;
+  padding: 2em 0 0 0;
+  background-color: #cfd2d3; }
+
+.chat-window ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 80%; }
+
+.chat-window ul li {
+  display: inline-block;
+  clear: both;
+  padding: 20px;
+  border-radius: 30px;
+  margin-bottom: 2px;
+  color: #fffff9; }
+
+.chat-window .him {
+  background: #00b1e1;
+  float: left; }
+
+.chat-window .me {
+  float: right;
+  background: #00bc70; }
+
+.chat-window .him + .me {
+  border-bottom-right-radius: 5px; }
+
+.chat-window .me + .me {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px; }
+
+.chat-window .me:last-of-type {
+  border-bottom-right-radius: 30px; }
