@@ -278,25 +278,25 @@ html.img-top div.slide-background.present {
   color: $childsafeWhite;
 }
 
-.chat-window .him {
+.chat-window .call {
   background: $childsafeBlue;
   float: left;
 }
 
-.chat-window .me {
+.chat-window .answer {
   float: right;
   background: $childsafeGreen;
 }
 
-.chat-window .him + .me {
+.chat-window .call + .answer {
   border-bottom-right-radius: 5px;
 }
 
-.chat-window .me + .me {
+.chat-window .answer + .answer {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 
-.chat-window .me:last-of-type {
+.chat-window .answer:last-of-type {
   border-bottom-right-radius: 30px;
 }

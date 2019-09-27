@@ -462,20 +462,20 @@ html.img-top div.slide-background.present {
   margin-bottom: 2px;
   color: #fffff9; }
 
-.chat-window .him {
+.chat-window .call {
   background: #00b1e1;
   float: left; }
 
-.chat-window .me {
+.chat-window .answer {
   float: right;
   background: #00bc70; }
 
-.chat-window .him + .me {
+.chat-window .call + .answer {
   border-bottom-right-radius: 5px; }
 
-.chat-window .me + .me {
+.chat-window .answer + .answer {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px; }
 
-.chat-window .me:last-of-type {
+.chat-window .answer:last-of-type {
   border-bottom-right-radius: 30px; }
