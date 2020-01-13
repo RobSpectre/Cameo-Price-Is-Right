@@ -116,6 +116,17 @@ function createChart(id, type, data) {
       bindto: "#" + id,
       data: data, 
     });
+  } else if (type == 'category-bar') {
+    data.type = 'bar';
+    return c3.generate({
+      bindto: "#" + id,
+      data: data,
+      axis: {
+        x: {
+          type: 'category'
+        }
+      }
+    });
   } else {
     return c3.generate({
       bindto: "#" + id,
