@@ -111,14 +111,16 @@ function addNewIdsToFragment(old_ids, fragment) {
 }
 
 function createChart(id, type, data) {
+  var options = {};
+
   if (type == 'pie' || type == 'donut') {
-    return c3.generate({
+    options = {
       bindto: "#" + id,
       data: data, 
-    });
+    };
   } else if (type == 'category-bar') {
     data.type = 'bar';
-    return c3.generate({
+    options = {
       bindto: "#" + id,
       data: data,
       axis: {
@@ -126,9 +128,9 @@ function createChart(id, type, data) {
           type: 'category'
         }
       }
-    });
+    };
   } else {
-    return c3.generate({
+    options = {
       bindto: "#" + id,
       data: data, 
       axis: {
@@ -139,8 +141,16 @@ function createChart(id, type, data) {
           }
         }
       }
-    });
+    };
   }
+
+  var chart_div = document.getElementById(id);
+
+  if (chart_div.className.includes("horizontal")) {
+    options['axis']['rotated'] = true;
+  }
+
+  return c3.generate(options);
 }
 
 function generateChartData() {
