@@ -107,7 +107,7 @@ section.has-dark-background {
     float: right;
     position: absolute;
     right: 0;
-    bottom: -0.2em;
+    bottom: -0.1em;
 }
 
 .reveal img {
@@ -216,6 +216,7 @@ html.img-top div.slide-background.present {
 .title .title h3 {
   background-color: $backgroundColor;
   color: $childsafeBlack;
+  margin-top: -0.1em;
 }
 
 .animated {
