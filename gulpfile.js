@@ -7,6 +7,8 @@ var webserver = require('gulp-webserver');
 var livereload = require('gulp-livereload');
 var open = require('gulp-open');
 var spawn = require('child_process').spawn;
+var postcss = require('gulp-postcss');
+var bro = require('gulp-bro');
 
 gulp.task('sass', function () {
   return gulp.src('./styles/source/*.scss')
@@ -36,8 +38,8 @@ gulp.task('autoreload', function() {
 
 
 gulp.task('watch', function() {
-  gulp.watch('./styles/source/*.scss', ['sass']);
-  gulp.watch('./js/*.js', ['lint', livereload.changed]);
+  gulp.watch('./styles/source/*.scss', ['sass', 'css']);
+  gulp.watch('./js/*.js', ['lint', 'js', livereload.changed]);
   gulp.watch('./styles/*.css').on('change', livereload.changed);
   gulp.watch('*.html').on('change', livereload.changed);
 });
@@ -59,4 +61,17 @@ gulp.task('open', function() {
   .pipe(open('', options));
 });
 
-gulp.task('default', ['sass', 'lint', 'watch', 'serve', 'open']);
+gulp.task('css', function () {
+  return gulp.src('./styles/*.css')
+    .pipe(postcss())
+    .pipe(gulp.dest('./dist'));
+});
+
+
+gulp.task('js', function() {
+  return gulp.src('./js/app.*')
+    .pipe(bro())
+    .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('default', ['sass', 'lint', 'watch', 'serve', 'open', 'css', 'js']);

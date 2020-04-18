@@ -10,6 +10,12 @@
 @import "bower_components/reveal.js/css/theme/template/settings";
 // ---------------------------------------------
 
+@import "node_modules/tailwindcss/base";
+
+@import "node_modules/tailwindcss/components";
+
+@import "node_modules/tailwindcss/utilities";
+
 
 // Include theme-specific fonts
 @import url(../bower_components/reveal.js/lib/font/source-sans-pro/source-sans-pro.css);

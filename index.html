@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Talk Title</title>
+<title>Cameo Price Is Right</title>
 
   <meta name="description" content="Another well-rehearsed talk from childsafe.ai." />
   <meta name="author" content="Rob Spectre" />
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="bower_components/c3/c3.min.css" />
   <link rel="stylesheet" href="bower_components/animate.css/animate.min.css" />
 
-  <link rel="stylesheet" href="styles/theme.css" id="theme" />
+  <link rel="stylesheet" href="dist/theme.css" id="theme" />
 </head>
 <body>
 <div class="reveal">
@@ -26,175 +26,202 @@
              data-background-color="#000"
              data-background-video-muted
              data-background-video-loop>
-      <div class="logo"></div>
       <div class="title">
-        <h3>Title</h3>
-        <h3>Author</h3>
-        <h3>@twitterhandle</h3>
-        <h3>email@example.com</h3>
+        <img style="margin-top: 7em;" src="images/cameo_price_is_right.png" />
       </div>
     </section>
-    <section class="black title">
-      <img src="images/childsafeai/png/green_and_white/childsafe-logo-gw-h@MD.png" />
-      <div class="title">
-        <h3>Title</h3>
-        <h3>Author</h3>
-        <h3>@twitterhandle</h3>
-        <h3>email@example.com</h3>
+    <section id="addplayers" x-data="players()">
+      <div>
+        <label for="player_name" class="block text-sm font-medium leading-5 text-gray-700"></label>
+        <div class="mt-1 flex rounded-md shadow-sm m-20">
+          <div class="relative flex-grow focus-within:z-10">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+              </svg>
+            </div>
+            <input class="form-input block w-full rounded-none rounded-l-md pl-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5" 
+                   placeholder="Shrimply Pibbles" 
+                   x-model="player_name" 
+                   @keydown.enter="addPlayer()">
+          </div>
+          <button class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-r-md text-gray-700 bg-gray-50 hover:text-gray-500 hover:bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+                  >
+            <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"/>
+            </svg>
+            <span class="ml-2" @click="addPlayer()">Add</span>
+          </button>
+        </div>
       </div>
-    </section>
-    <section>
-      <img
-      src="images/childsafeai/svg/green_and_dark/childsafe-logo-gd-v.svg" />
-      <h1>Regular Photo Card</h1>
-    </section>
-    <section data-background-image="images/ramones.jpg" data-state="img-top">
-      <h1>Background Card</h1>
-    </section>
-    <section class="green">
-      <h2 class="headline">Headline Card</h2>
-    </section>
-    <section>
-      <h2 class="headline">Light Headline Card</h2>
-    </section>
-    <section class="chart-pie-slide">
-      <div class="chart pie" id="pie"></div>
-      <h1>Pie Card</h1>
-    </section>
-    <section class="chart-line-slide">
-      <div class="chart line" id="chart-line"></div>
-      <h1>Line Card</h1>
-    </section>
-    <section class="chart-bar-slide">
-      <div class="chart bar" id="chart-bar"></div>
-      <h1>Bar Card</h1>
-    </section>
-    <section class="chart-bar-slide">
-      <div class="chart bar horizontal" id="chart-bar-horizontal"></div>
-      <h1>Horizontal Bar</h1>
-    </section>
-    <section class="chart-area-slide">
-      <div class="chart area" id="chart-area"></div>
-      <h1>Area Card</h1>
-    </section>
-    <section class="chart-pie-slide">
-      <div class="chart pie" id="chart-pie-buildout">[["US Developers", 4600000]]</div>
-      <div class="fragment chart">[["EMEA Developers", 6300000]]</div>
-      <div class="fragment chart">[["APAC Developers", 6100000]]</div>
-      <h1>Pie Card Buildout</h1>
-    </section>
-    <section class="chart-area-slide">
-      <div class="chart area" id="chart-area-buildout">data/buildout_example_1.csv</div>
-      <div class="fragment chart">data/buildout_example_2.csv</div>
-      <div class="fragment chart">data/buildout_example_3.csv</div>
-      <h1>Buildout With Data</h1>
-    </section>
-    <section class="funnel-chart-slide"> 
-      <h1>Funnel Card</h1>
-      <div class="funnel chart" id="funnel-chart">[["Awareness", 2000000],["Understanding", 1000000],["Adoption", 20000], ["Activation", 20000]]</div>
-    </section>
-    <section class="funnel-chart-slide"> 
-      <h1>Funnel Card Buildout</h1>
-      <div class="funnel chart" id="funnel-chart-buildout">[["Awareness", 2000000]]</div>
-      <div class="fragment funnel chart">["Understanding", 1000000]</div>
-      <div class="fragment funnel chart">["Adoption", 20000]</div>
-      <div class="fragment funnel chart">["Activation", 20000]</div>
-    </section>
-    <section class="pyramid-chart-slide"> 
-      <h1>Pyramid Card</h1>
-      <div class="pyramid chart" id="pyramid-chart">[["Awareness", 5],["Understanding", 4],["Adoption", 3], ["Activation", 2]]</div>
-    </section>
-    <section class="pyramid-chart-slide"> 
-      <h1>Pyramid Buildout</h1>
-      <div class="pyramid chart" id="pyramid-chart-buildout">[["Awareness", 5]]</div>
-      <div class="fragment pyramid chart">["Understanding", 4]</div>
-      <div class="fragment pyramid chart">["Adoption", 3]</div>
-      <div class="fragment pyramid chart">["Activation", 2]</div>
-    </section>
-    <section class="map-slide">
-      <div class="map">{"location": "Brooklyn, NY", "zoom": 7}</div>
-      <div class="fragment map marker">{"location": "Brooklyn, NY", "style": "twilio_red"}</div>
-      <div class="fragment map zoom">{"location": "United States", "zoom": 4}</div>
-      <div class="fragment map marker">[{"location": "San Francisco, CA", "style": "twilio_purple"}, {"location": "Mountain View, CA", "style": "twilio_blue"}]</div>
-      <div class="fragment map zoom">{"location": "Burkina Faso", "zoom": 2}</div>
-      <h1>Map Card</h1>
-    </section>
-    <section class="network-slide darkgray">
-      <h1>Network Card</h1>
-      <div class="network" id="network-chart"></div>
-      <div class="fragment network add node">{"type": "developer", "quantity": 100}</div>
-      <div class="fragment network add node">[{"type": "Twilio"}, {"type": "devangels"}]</div>
-      <div class="fragment network zoom"></div>
-      <div class="fragment network zoom">{"node": "Twilio", "zoom": 0.4}</div>
-      <div class="fragment network add edge">{"from_type": "devangel", "to_type": "developer", "random": true, "type": "devangel", "interval": 200}</div>
-      <div class="fragment network zoom">{"type": "devangel", "zoom": "random"}</div>
-      <div class="fragment network zoom"></div>
-      <div class="fragment network stop"></div>
-      <div class="fragment network add node">{"type": "educators"}</div>
-      <div class="fragment network zoom">{"type": "educator", "zoom": "random"}</div>
-      <div class="fragment network add edge">{"from": "Twilio", "to_type": "developer", "type": "educator", "random": true, "interval": 300}</div>
-      <div class="fragment network zoom"></div>
-      <div class="fragment network stop"></div>
-      <div class="fragment network add node">{"type": "community"}</div>
-      <div class="fragment network add edge">{"from_type": "developer", "to_type": "developer", "type": "community", "random": true, "interval": 200}</div>
-      <div class="fragment network zoom"></div>
-    </section>                
-    <section>
-      <h1>Youtube Card</h1>
-      <iframe width="853" height="480" src="//www.youtube.com/embed/aZGn4LncY0g?rel=0&amp;controls=0&amp;showinfo=0&amp;start=10&amp;enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-    </section>
-    <section class="timeline-slide">
-      <div class="timeline" id="timeline-chart">data/timeline.json</div>
-      <div class="fragment timeline"><h2>Show Content</h2></div>
-      <div class="fragment timeline"
-        data-set-window="2017-04-19,2017-04-23"><h2>Adjust Window</h2></div>
-      <div class="fragment timeline" data-move-to-date="2017-04-22"><h2>Move To
-          Date</h2></div>
-      <div class="fragment timeline" data-fit><h2>Fit All Items</h2></div>
-      <div class="fragment timeline" data-select-items="5"><h2>Select
-          Item</h2></div>
-      <div class="fragment timeline" data-select-items="1,3"><h2>Select Multiple
-          Items</h2></div>
-      <h1>Timeline</h1>
-    </section>
-    <section>
-      <h2 class="fragment">Element to Animate</h2>
-      <div class="fragment animated hinge"></div>
-      <h1>Animation Card</h1>
-    </section>
-    <section>
-      <pre><code data-noescape>
-from twilio.rest import TwilioRestClient
-
-client = TwilioRestClient()
-
-client.messages.create(from_="+15556667777",
-                       to="+15558675309",
-                       body="Hot damn, this interface is cozy.")
-      </code></pre>
-      <h1>Code card</h1>
-    </section>
-    <section>
-      <div class="chat-window">
-        <ul>
-          <li class="fragment call">Hello there.</li>
-          <li class="fragment answer">Hi.</li>
-          <li class="fragment answer">How are you?</li>
-        </ul>
+      <div class="flex flex-col">
+        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+          <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+            <table class="min-w-full">
+              <thead>
+                <tr>
+                  <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    Score 
+                  </th>
+                  <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    Remove 
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <template x-for="player in players" :key="player.name">
+                  <tr class="bg-white">
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900"
+                        x-text="player.name">
+                    </td>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500"
+                        x-text="player.score">
+                    </td>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                      <button class="text-xl ml-2"
+                              @click="removePlayer(player.name)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path class="heroicon-ui" d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1z"/></svg></button>
+                    </td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <h1>Chat card</h1>
+      <h1>Add Players</h1>
     </section>
-    <section class="title" data-background-video="images/intro.mp4"
-             data-background-color="#000"
-             data-background-video-muted
-             data-background-video-loop>
-      <img src="images/childsafeai/svg/light/childsafe-logo-light-h.svg" />
-      <div class="title">
-        <h3>Thank You!</h3>
-        <h3>More Resources</h3>
-        <h3>childsafe.ai</h3>
-        <h3>github.com/RobSpectre/Talks</h3>
+    <section id="question-1" x-data="players()">
+      <div class="h-screen flex overflow-hidden">
+        <!-- Static sidebar for desktop -->
+        <div class="hidden md:flex md:flex-shrink-0">
+          <div class="flex flex-col w-64">
+            <div class="flex items-center h-16 flex-shrink-0 px-4 green">
+              <img class="h-8 w-auto" src="/images/cameo_price_is_right.png" alt="Workflow" />
+            </div>
+            <div class="h-0 flex-1 flex flex-col overflow-y-auto">
+              <!-- Sidebar component, swap this element with another sidebar if you like -->
+              <nav class="flex-1 px-2 py-4 bg-gray-800">
+                <template x-for="player in players" :key="player.name">
+                  <div class="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"> 
+                    <div class="font-semibold w-48" x-text="player.name"></div>
+                    <div class="inline-flex items-center px-3 py-0.5
+                      rounded-full text-sm font-medium leading-5
+                      green" x-text="player.score"></div>
+                  </div>
+                </template>
+              </nav>
+            </div>
+          </div>
+        </div>
+          <main class="flex-1 relative z-0 overflow-y-auto py-6 focus:outline-none" tabindex="0">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+            <!-- Replace with your content -->
+            <div class="py-4 grid grid-rows-3 grid-flow-col gap-4">
+              <div class="row-span-1 col-span-2 border-4 border-dashed
+                border-gray-200 rounded-lg w- cluse">
+                <h4 class="fragment">Stuff</h4>
+                <h4 class="fragment">Things</h4>
+                <h4 class="fragment">Bonk</h4>
+              </div>
+              <div class="row-span-2 col-span-2">
+                <img class="fragment m-0" style="margin: auto;" src="images/chris_kirkpatrick.png" />
+              </div>
+            </div>
+            <!-- /End replace -->
+          </div>
+          </main>
+        </div>
+      <h1 class="fragment">Chris Kirkpatrick</h2>
+    </section>
+    <section x-data="players()">
+      <div class="h-screen flex overflow-hidden">
+        <!-- Static sidebar for desktop -->
+        <div class="hidden md:flex md:flex-shrink-0">
+          <div class="flex flex-col w-64">
+            <div class="flex items-center h-16 flex-shrink-0 px-4 green">
+              <img class="h-8 w-auto" src="/images/cameo_price_is_right.png" alt="Workflow" />
+            </div>
+            <div class="h-0 flex-1 flex flex-col overflow-y-auto">
+              <!-- Sidebar component, swap this element with another sidebar if you like -->
+              <nav class="flex-1 px-2 py-4 bg-gray-800">
+                <template x-for="player in players" :key="player.name">
+                  <div class="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"> 
+                    <div class="font-semibold w-48" x-text="player.name"></div>
+                    <div class="inline-flex items-center px-3 py-0.5
+                      rounded-full text-sm font-medium leading-5
+                      green" x-text="player.score"></div>
+                  </div>
+                </template>
+              </nav>
+            </div>
+          </div>
+        </div>
+          <main class="flex-1 relative z-0 overflow-y-auto py-6 focus:outline-none" tabindex="0">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+            <!-- Replace with your content -->
+            <div class="py-4 content-center">
+              <video controls>
+                <source src="images/kirkpatrick_cameo.mp4" type="video/mp4">
+              </video>
+            </div>
+            <!-- /End replace -->
+          </div>
+          </main>
+        </div>
+      <h1>Chris Kirkpatrick</h1>
+    </section>
+    <section id="answer-1" x-data="players()">
+      <div class="flex flex-col">
+        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+          <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+            <table class="min-w-full">
+              <thead>
+                <tr>
+                  <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    Guess 
+                  </th>
+                  <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    Input 
+                  </th>
+                  <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    Remove 
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <template x-for="player in players" :key="player.name">
+                  <tr class="bg-white">
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900"
+                        x-text="player.name">
+                    </td>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500"
+                        x-text="player.score">
+                    </td>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500"
+                        x-text="player.score">
+                      <input class="form-input block w-full rounded-none rounded-l-md pl-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5" 
+                             x-model="guess" 
+                             @keydown.enter="addGuess(player.name)">
+                    </td>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                      <button class="text-xl ml-2"
+                              @click="removePlayer(player.name)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path class="heroicon-ui" d="M8 6V4c0-1.1.9-2 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-1v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2h5zM6 8v12h12V8H6zm8-2V4h-4v2h4zm-4 4a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1zm4 0a1 1 0 0 1 1 1v6a1 1 0 0 1-2 0v-6a1 1 0 0 1 1-1z"/></svg></button>
+                    </td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
+      <h1>Add Players</h1>
+      <h1>Chris Kirkpatrick</h1>
     </section>
   </div>
 </div>
@@ -221,5 +248,6 @@ client.messages.create(from_="+15556667777",
   <script src="js/animation.js"></script>
   <script src="js/timeline.js"></script>
   <script src="js/custom.js"></script>
+  <script src="dist/app.js"></script>
 </body>
 </html>
