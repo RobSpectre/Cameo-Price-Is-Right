@@ -11,11 +11,8 @@
 // ---------------------------------------------
 
 @import "node_modules/tailwindcss/base";
-
 @import "node_modules/tailwindcss/components";
-
 @import "node_modules/tailwindcss/utilities";
-
 
 // Include theme-specific fonts
 @import url(../bower_components/reveal.js/lib/font/source-sans-pro/source-sans-pro.css);
@@ -120,6 +117,11 @@ section.has-dark-background {
     background: none !important;
     border: none !important;
     box-shadow: none !important;
+}
+
+.reveal .clear-reveal {
+  margin: 0 !important;
+  max-width: none !important;
 }
 
 .reveal .title h3 {
@@ -306,4 +308,10 @@ html.img-top div.slide-background.present {
 
 .chat-window .answer:last-of-type {
   border-bottom-right-radius: 30px;
+}
+
+.reveal ol, .reveal dl, .reveal ul {
+  display: unset !important;
+  text-align: unset;
+  margin: unset;
 }

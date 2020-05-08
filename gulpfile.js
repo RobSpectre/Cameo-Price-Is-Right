@@ -6,14 +6,17 @@ var sass = require('gulp-sass');
 var webserver = require('gulp-webserver');
 var livereload = require('gulp-livereload');
 var open = require('gulp-open');
-var spawn = require('child_process').spawn;
 var postcss = require('gulp-postcss');
+var babelify = require('babelify');
+var vueify = require('vueify-next');
 var bro = require('gulp-bro');
+
 
 gulp.task('sass', function () {
   return gulp.src('./styles/source/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./styles'));
+    .pipe(gulp.dest('./styles'))
+    .pipe(livereload());
 });
 
 gulp.task('lint', function() {
@@ -22,26 +25,15 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('autoreload', function() {
-  var process;
-
-  function restart() {
-    if (process) {
-      process.kill();
-    }
-    process = spawn('gulp', ['default'], {stdio: 'inherit'});
-  }
-
-  gulp.watch('gulpfile.js', restart);
-  restart();
-});
-
-
 gulp.task('watch', function() {
-  gulp.watch('./styles/source/*.scss', ['sass', 'css']);
-  gulp.watch('./js/*.js', ['lint', 'js', livereload.changed]);
-  gulp.watch('./styles/*.css').on('change', livereload.changed);
-  gulp.watch('*.html').on('change', livereload.changed);
+  gulp.watch('./styles/source/*.scss', gulp.series('sass', 'css'));
+  gulp.watch('tailwind.config.js', gulp.series('sass', 'css'));
+  gulp.watch('./js/*.js', gulp.series('lint', 'js'));
+  gulp.watch('./js/App.vue', gulp.series('js'));
+  gulp.watch('./components/*', gulp.series('js'));
+  gulp.watch('*.html', livereload());
+  gulp.watch('./decks/*.json', gulp.series('js'));
+  livereload.listen()
 });
 
 gulp.task('serve', function() {
@@ -54,24 +46,28 @@ gulp.task('serve', function() {
 
 gulp.task('open', function() {
   var options = {
-    url: 'http://localhost:8000',
-    app: 'google-chrome'
+    app: 'google-chrome',
+    uri: 'http://localhost:8000'
   };
-  gulp.src('./index.html')
-  .pipe(open('', options));
+  return gulp.src(__filename)
+  .pipe(open(options));
 });
 
 gulp.task('css', function () {
   return gulp.src('./styles/*.css')
     .pipe(postcss())
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist'))
+    .pipe(livereload());
 });
 
 
 gulp.task('js', function() {
-  return gulp.src('./js/app.*')
-    .pipe(bro())
-    .pipe(gulp.dest('./dist'));
+  return gulp.src(['./js/app.*', './js/App.vue', './components/*.vue'])
+    .pipe(bro({transform: ['babelify',
+                           vueify]}))
+    .pipe(gulp.dest('./dist'))
+    .pipe(livereload());
 });
 
-gulp.task('default', ['sass', 'lint', 'watch', 'serve', 'open', 'css', 'js']);
+gulp.task('default',
+          gulp.series('sass', 'css', 'lint', 'js', gulp.parallel('serve', 'watch', 'open')));
