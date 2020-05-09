@@ -23,22 +23,27 @@ var _default = {
   data: function data() {
     return {
       guesses: [],
-      currentPlayer: '',
-      playerIndex: 0,
       complete: false,
       winner: '',
       winning_guess: 0
     };
   },
-  mounted: function mounted() {
-    this.currentPlayer = this.game.players[this.game.player_button].name;
-    this.playerIndex = this.game.player_button;
-  },
   computed: _objectSpread({
     guessesByPrice: function guessesByPrice() {
-      return this.guesses.sort(function (a, b) {
-        return a.guess - b.guess;
-      }).reverse();
+      if (this.guesses.length > 0) {
+        return this.guesses.sort(function (a, b) {
+          return a.guess - b.guess;
+        }).reverse();
+      } else {
+        return [];
+      }
+    },
+    currentPlayer: function currentPlayer() {
+      if (this.game.players.length > 0) {
+        return this.game.players[this.game.playerIndex].name;
+      } else {
+        return '';
+      }
     }
   }, (0, _vuex.mapState)(['game'])),
   methods: _objectSpread({
@@ -51,17 +56,11 @@ var _default = {
     },
     nextPlayer: function nextPlayer() {
       this.guess = '';
-      this.playerIndex++;
+      this.increasePlayerIndex();
 
-      if (this.playerIndex >= this.game.players.length) {
-        this.playerIndex = 0;
-      }
-
-      if (this.playerIndex === this.game.player_button) {
+      if (this.game.playerIndex == this.game.player_button) {
         this.complete = true;
         return;
-      } else {
-        this.currentPlayer = this.game.players[this.playerIndex].name;
       }
     },
     findWinner: function findWinner() {
@@ -70,7 +69,7 @@ var _default = {
       var best_guess = 0;
       var winner = "";
       this.guesses.forEach(function (guess) {
-        if (guess.guess > best_guess && guess.guess <= _this.price) {
+        if (parseInt(guess.guess) > best_guess && parseInt(guess.guess) <= parseInt(_this.price)) {
           best_guess = guess.guess;
           winner = guess.player_name;
         }
@@ -87,7 +86,7 @@ var _default = {
       this.increasePlayerButton();
       return;
     }
-  }, (0, _vuex.mapMutations)(['increasePlayerScore', 'increasePlayerButton']))
+  }, (0, _vuex.mapMutations)(['increasePlayerScore', 'increasePlayerButton', 'increasePlayerIndex']))
 };
 exports["default"] = _default;
 })()

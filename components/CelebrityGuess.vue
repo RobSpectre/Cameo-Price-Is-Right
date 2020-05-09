@@ -118,20 +118,25 @@ export default {
   data: function() {
     return {
       guesses: [],
-      currentPlayer: '',
-      playerIndex: 0,
       complete: false,
       winner: '',
       winning_guess: 0
     }
   },
-  mounted() {
-    this.currentPlayer = this.game.players[this.game.player_button].name
-    this.playerIndex = this.game.player_button
-  },
   computed: {
     guessesByPrice() {
-      return this.guesses.sort((a, b) => a.guess - b.guess).reverse()
+      if (this.guesses.length > 0) {
+        return this.guesses.sort((a, b) => a.guess - b.guess).reverse()
+      } else {
+        return []
+      }
+    },
+    currentPlayer() {
+      if (this.game.players.length > 0) {
+        return this.game.players[this.game.playerIndex].name
+      } else {
+        return ''
+      }
     },
     ...mapState(['game']),
   },
@@ -145,17 +150,11 @@ export default {
     },
     nextPlayer() {
       this.guess = ''
-      this.playerIndex++ 
+      this.increasePlayerIndex()
 
-      if (this.playerIndex >= this.game.players.length) {
-        this.playerIndex = 0
-      }
-
-      if (this.playerIndex === this.game.player_button) {
+      if (this.game.playerIndex == this.game.player_button) {
         this.complete = true
         return
-      } else {
-        this.currentPlayer = this.game.players[this.playerIndex].name
       }
     },
     findWinner() {
@@ -163,7 +162,7 @@ export default {
       let winner = ""
 
       this.guesses.forEach((guess) => {
-        if (guess.guess > best_guess && guess.guess <= this.price) {
+        if (parseInt(guess.guess) > best_guess && parseInt(guess.guess) <= parseInt(this.price)) {
           best_guess = guess.guess;
           winner = guess.player_name;
         }
@@ -185,7 +184,9 @@ export default {
 
       return
     },
-    ...mapMutations(['increasePlayerScore', 'increasePlayerButton'])
+    ...mapMutations(['increasePlayerScore',
+                     'increasePlayerButton',
+                     'increasePlayerIndex'])
   }
 }
 

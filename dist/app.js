@@ -96,22 +96,27 @@ var _default = {
   data: function data() {
     return {
       guesses: [],
-      currentPlayer: '',
-      playerIndex: 0,
       complete: false,
       winner: '',
       winning_guess: 0
     };
   },
-  mounted: function mounted() {
-    this.currentPlayer = this.game.players[this.game.player_button].name;
-    this.playerIndex = this.game.player_button;
-  },
   computed: _objectSpread({
     guessesByPrice: function guessesByPrice() {
-      return this.guesses.sort(function (a, b) {
-        return a.guess - b.guess;
-      }).reverse();
+      if (this.guesses.length > 0) {
+        return this.guesses.sort(function (a, b) {
+          return a.guess - b.guess;
+        }).reverse();
+      } else {
+        return [];
+      }
+    },
+    currentPlayer: function currentPlayer() {
+      if (this.game.players.length > 0) {
+        return this.game.players[this.game.playerIndex].name;
+      } else {
+        return '';
+      }
     }
   }, (0, _vuex.mapState)(['game'])),
   methods: _objectSpread({
@@ -124,17 +129,11 @@ var _default = {
     },
     nextPlayer: function nextPlayer() {
       this.guess = '';
-      this.playerIndex++;
+      this.increasePlayerIndex();
 
-      if (this.playerIndex >= this.game.players.length) {
-        this.playerIndex = 0;
-      }
-
-      if (this.playerIndex === this.game.player_button) {
+      if (this.game.playerIndex == this.game.player_button) {
         this.complete = true;
         return;
-      } else {
-        this.currentPlayer = this.game.players[this.playerIndex].name;
       }
     },
     findWinner: function findWinner() {
@@ -143,7 +142,7 @@ var _default = {
       var best_guess = 0;
       var winner = "";
       this.guesses.forEach(function (guess) {
-        if (guess.guess > best_guess && guess.guess <= _this.price) {
+        if (parseInt(guess.guess) > best_guess && parseInt(guess.guess) <= parseInt(_this.price)) {
           best_guess = guess.guess;
           winner = guess.player_name;
         }
@@ -160,7 +159,7 @@ var _default = {
       this.increasePlayerButton();
       return;
     }
-  }, (0, _vuex.mapMutations)(['increasePlayerScore', 'increasePlayerButton']))
+  }, (0, _vuex.mapMutations)(['increasePlayerScore', 'increasePlayerButton', 'increasePlayerIndex']))
 };
 exports["default"] = _default;
 })()
@@ -476,8 +475,8 @@ exports["default"] = _default;
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"reveal",attrs:{"id":"app"}},[_c('div',{staticClass:"slides"},[_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._m(2),_vm._v(" "),_vm._m(3),_vm._v(" "),_vm._m(4),_vm._v(" "),_vm._m(5),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"John Goblikon","hint1":"Green","hint2":"Goblin","hint3":"Metal Band","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-OkgsUF1N--b.mp4","image":"https://i.ytimg.com/vi/PIWZVY3i8uc/maxresdefault.jpg","price":"50"}})],1)])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"intro",attrs:{"data-background-video":"images/intro.mp4","data-background-color":"#000","data-background-video-muted":"","data-background-video-loop":""}},[_c('div',{staticClass:"title"},[_c('img',{staticStyle:{"margin-top":"7em"},attrs:{"src":"images/cameo_price_is_right.png"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"intro",attrs:{"data-background-video":"images/intro.mp4","data-background-color":"#000","data-background-video-muted":"","data-background-video-loop":""}},[_c('h1',[_vm._v("The Price Is Right")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{attrs:{"data-background-image":"images/cameo_front_page.png"}},[_c('h1',[_vm._v("Cameo")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{attrs:{"data-background-video":"images/goblikon_christmas.mp4","data-background-color":"#000"}},[_c('h1',[_vm._v("Example")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{attrs:{"data-background-video":"images/john_goblikon.mp4","data-background-color":"#000"}},[_c('h1',[_vm._v("COVID-19")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('h3',{staticClass:"fragment"},[_vm._v("Two Teams")]),_vm._v(" "),_c('h3',{staticClass:"fragment"},[_vm._v("Alternate scoring")]),_vm._v(" "),_c('h3',{staticClass:"fragment"},[_vm._v("Contestant")]),_vm._v(" "),_c('h3',{staticClass:"fragment"},[_vm._v("Team Provides Clues")]),_vm._v(" "),_c('h3',{staticClass:"fragment"},[_vm._v("Limited Time")]),_vm._v(" "),_c('h1',[_vm._v("Gameplay")])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"reveal",attrs:{"id":"app"}},[_c('div',{staticClass:"slides"},[_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_c('section',{attrs:{"data-background-image":"images/cameo_front_page.png"}}),_vm._v(" "),_vm._m(2),_vm._v(" "),_vm._m(3),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Sean Astin","hint1":"The Shire","hint2":"Intensely Loyal","hint3":"Not Great At Football","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-s45CjnGa5.mp4","price":"295","image":"https://i.ytimg.com/vi/uhAPUf-w64o/maxresdefault.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Chris Hansen","hint1":"Big Hero For Rob","hint2":"Journalist","hint3":"Least Welcome Camera","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-CvmPLQMEJs.mp4","price":"50","image":"https://media.tegna-media.com/assets/WTIC/images/d40d6a85-c327-4dd7-ac02-c38514293aed/d40d6a85-c327-4dd7-ac02-c38514293aed_1920x1080.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Ernie Hudson","hint1":"Killer Stache","hint2":"Twinkie","hint3":"Who You Gonna Call?","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-5FZ-qSWcNh6.mp4","price":"135","image":"https://deadentertainment.com/uploads/ernie-hudson-confirms-involvement-in-new-ghostbusters-sequel-jason-reitman-winston-zeddemore-13ys150187.png"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Johnny Damon","hint1":"Baseball Jesus","hint2":"2 Critical At-Bats","hint3":"Traitor","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-Z-NjAA9e4P.mp4","price":"100","image":"https://images2.minutemediacdn.com/image/fetch/w_736,h_485,c_fill,g_auto,f_auto/https%3A%2F%2Fbosoxinjection.com%2Fwp-content%2Fuploads%2Fgetty-images%2F2017%2F07%2F51523062-850x560.jpeg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Steve Guttenberg","hint1":"Archetypical 80s Lead Man","hint2":"Cop","hint3":"Roboticist","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-CfPXn8TkK7.mp4","price":"150","image":"https://doomrocket.com/wp-content/uploads/2014/11/short_circuit_still_04_8x10.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Gary Busey","hint1":"Lethal Bad Guy","hint2":"Taxi Driver","hint3":"Certifiably Crazy","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-5o70bpxoE.mp4","price":"350","image":"https://cdn2.newsok.biz/cache/w620-82984c26d6d75dbc514b6fe25a0ccc29.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Anthony Michael Hall","hint1":"SNL Alum","hint2":"Early Programmer","hint3":"John Hughes","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-_a19XKIz-ah.mp4","price":"150","image":"https://bloximages.newyork1.vip.townnews.com/dentonrc.com/content/tncms/assets/v3/editorial/3/3b/33bc1be3-acad-5823-8a7c-7ed4bac8c1de/5d3bed1536ef6.image.jpg?resize=1200%2C787"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_vm._m(4),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Dolph Lundgren","hint1":"1 of 4","hint2":"Jacked","hint3":"Not Russian","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-wKF56m4CLN.mp4","price":"250","image":"https://www.telegraph.co.uk/content/dam/films/2018/11/29/Lundgren_trans_NvBQzQNjv4Bq7PJn9ps4IyDNr2w-BoesQZxCWy5ffZoUVLnp9tp0Oug.JPG?imwidth=450"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Ray Lewis","hint1":"Linebacker","hint2":"Likely Murderer","hint3":"Cheaper Than Vick","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-xALJE5FqFv.mp4","price":"300","image":"https://clutchpoints.com/wp-content/uploads/2019/12/Ray-Lewis-tells-Tom-Brady-to-_handle-your-business_-heading-into-season-finale.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Anthony Scaramucci","hint1":"Hedge fund manager","hint2":"11 Days","hint3":"The Mooch","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-Fp9p0IdMNh.mp4","price":"50","image":"https://images.axios.com/EhiFEakFYiz2jb4Wa_ke91sjiLA=/2019/08/11/1565565354100.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Stoney LaRue","hint1":"Barber County Fave","hint2":"Billy Bob's","hint3":"Red Dirt Royalty","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-mkaYOqRi75.mp4","price":"50","image":"https://bloximages.chicago2.vip.townnews.com/wacotrib.com/content/tncms/assets/v3/editorial/d/da/dda38bb1-7216-5f79-8487-753e359832ff/5e4e6a33422cd.image.jpg?resize=1200%2C858"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Santa Claus","hint1":"Most Famous Beard","hint2":"4th Century","hint3":"Ole Saint Nick","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-Qp2LTnNcp.mp4","price":"15","image":"https://resize.hswstatic.com/w_907/gif/santa-claus-orig.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Brett Favre","hint1":"1 Day","hint2":"Hall of Famer","hint3":"297 starts","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-Nd_sTAfuE.mp4","price":"250","image":"https://static.clubs.nfl.com/image/private/t_editorial_landscape_12_desktop/packers/z0dpry6g8exrat1ivdwd.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Not Tom Cruise","hint1":"Recognizable Face","hint2":"Maverick","hint3":"Scientologist","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-waMkw8skBw.mp4","price":"65","image":"https://i.kym-cdn.com/photos/images/facebook/001/158/297/130.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_vm._m(5),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Scott Stapp","hint1":"Buttrock","hint2":"Worst National Anthem","hint3":"Arms Wide Open","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-pdPNkNZ2p.mp4","price":"500","image":"https://www.chicagotribune.com/resizer/_30znbEJ2vxbC2-fIyltejiXw6A=/1200x0/top/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/RIZUKETZX5CTBJ5KSMXRNFR7PQ.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Toiley T. Paper","hint1":"TikTok","hint2":"1M followers","hint3":"Most Coveted","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-bbXCB9yoi.mp4","price":"24","image":"https://yt3.ggpht.com/a/AATXAJw7I5jqD891Y5V7i-FQgplPivroi_Bhoe3p2A=s900-c-k-c0xffffffff-no-rj-mo"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"John Finlay","hint1":"Hates Shirts","hint2":"Dental Work","hint3":"Private Zoo","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-gcXrbq5PD.mp4","price":"80","image":"https://www.oxygen.com/sites/oxygen/files/2020-03/john-finlay-netflix.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Ed Asner","hint1":"TV Legend","hint2":"Elf","hint3":"Mary Tyler Moore","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-iRF9IT7GsDo.mp4","price":"200","image":"https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTY5NDY3NjQyMDk1MDg1MDE5/mary-tyler-moore-ed-asner-gettyimages-71599960.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Chantal Kreviazuk","hint1":"Winnipeg, Manitoba","hint2":"5 noms 2 wins","hint3":"Armageddon Cover","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-gagFCPgmbXD.mp4","price":"300","image":"https://upload.wikimedia.org/wikipedia/en/1/1a/Chantal_Kreviazuk_Surrounded.jpg"}}),_vm._v(" "),_c('add-player-card'),_vm._v(" "),_c('round',{attrs:{"celebrity":"Gloria Gaynor","hint1":"Soul Satisfiers","hint2":"Park Avenue Sound","hint3":"Rob's Cover","video":"https://d3el26csp1xekx.cloudfront.net/v/no-wm-q7W7-Af9-3.mp4","price":"350","image":"https://cdn.nashvillescene.com/files/base/scomm/nvs/image/2019/06/960w/Gloria_Gaynor_photo_credit_Alex_Arroyo_4.5d0035b81c94a.jpg"}}),_vm._v(" "),_c('add-player-card')],1)])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"intro",attrs:{"data-background-video":"images/intro.mp4","data-background-color":"#000","data-background-video-muted":"","data-background-video-loop":""}},[_c('div',{staticClass:"title"},[_c('img',{staticStyle:{"margin-top":"7em"},attrs:{"src":"images/cameo_price_is_right.png"}})])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"intro",attrs:{"data-background-video":"images/intro.mp4","data-background-color":"#000","data-background-video-muted":"","data-background-video-loop":""}},[_c('h1',[_vm._v("The Price Is Right")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{attrs:{"data-background-video":"images/john_goblikon.mp4","data-background-color":"#000"}},[_c('h1',[_vm._v("COVID-19")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('h3',{staticClass:"fragment"},[_vm._v("Celebrity")]),_vm._v(" "),_c('h3',{staticClass:"fragment"},[_vm._v("Video Intro")]),_vm._v(" "),_c('h3',{staticClass:"fragment"},[_vm._v("Guess the Rate")]),_vm._v(" "),_c('h3',{staticClass:"fragment"},[_vm._v("Price Is Right Rules")]),_vm._v(" "),_c('h3',{staticClass:"fragment"},[_vm._v("TP for Winner!")]),_vm._v(" "),_c('h1',[_vm._v("Gameplay")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"intro",attrs:{"data-background-video":"images/covid-19.mp4","data-background-color":"#000","data-background-video-loop":""}},[_c('div',{staticClass:"title"},[_c('img',{staticStyle:{"margin-top":"7em"},attrs:{"src":"images/cameo_price_is_right.png"}}),_vm._v(" "),_c('h3',[_vm._v("Beverage Break")]),_vm._v(" "),_c('h3',[_vm._v("covid-19")]),_vm._v(" "),_c('h3',[_vm._v("Rad Jet bro")])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"intro",attrs:{"data-background-video":"images/raining_tacos.mp4","data-background-color":"#000","data-background-video-loop":""}},[_c('div',{staticClass:"title"},[_c('img',{staticStyle:{"margin-top":"7em"},attrs:{"src":"images/cameo_price_is_right.png"}}),_vm._v(" "),_c('h3',[_vm._v("Beverage Break")]),_vm._v(" "),_c('h3',[_vm._v("It might snow tonight")]),_vm._v(" "),_c('h3',[_vm._v("This is a crazy year")])])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -523,29 +522,14 @@ var _vuexPersistedstate = _interopRequireDefault(require("vuex-persistedstate"))
 
 _vue["default"].use(_vuex["default"]);
 
-function shuffle(array) {
-  var currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
-
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
-
 var state = {
   game: {
     players: [],
     teams: [],
     rounds: [],
     team_counter: 0,
-    player_button: 0
+    player_button: 0,
+    playerIndex: 0
   }
 };
 var getters = {
@@ -685,8 +669,17 @@ var mutations = {
   increasePlayerButton: function increasePlayerButton(state) {
     state.game.player_button++;
 
-    if (state.game.playerButton >= state.game.players.length) {
+    if (state.game.player_button >= state.game.players.length) {
       state.game.player_button = 0;
+    }
+
+    state.game.playerIndex = state.game.player_button;
+  },
+  increasePlayerIndex: function increasePlayerIndex(state) {
+    state.game.playerIndex++;
+
+    if (state.game.playerIndex >= state.game.players.length) {
+      state.game.playerIndex = 0;
     }
   }
 };

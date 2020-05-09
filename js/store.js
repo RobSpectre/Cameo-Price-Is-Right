@@ -4,27 +4,14 @@ import createPersistedState from "vuex-persistedstate"
 
 Vue.use(Vuex)
 
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
-
 const state = {
   game: {
     players: [],
     teams: [],
     rounds: [],
     team_counter: 0,
-    player_button: 0
+    player_button: 0,
+    playerIndex: 0
   }
 }
 
@@ -161,8 +148,17 @@ const mutations = {
   increasePlayerButton(state) {
     state.game.player_button++
 
-    if (state.game.playerButton >= state.game.players.length) {
+    if (state.game.player_button >= state.game.players.length) {
       state.game.player_button = 0
+    }
+
+    state.game.playerIndex = state.game.player_button
+  },
+  increasePlayerIndex(state) {
+    state.game.playerIndex++
+
+    if (state.game.playerIndex >= state.game.players.length) {
+      state.game.playerIndex = 0
     }
   }
 }
